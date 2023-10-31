@@ -1,6 +1,9 @@
-// Import required libraries
 import { SerialPort } from 'serialport';
-const socketIO = require('socket.io');
+import { createServer } from 'http'; // Import http module for Socket.io
+import { Server } from 'socket.io';
+
+const httpServer = createServer();
+const io = new Server(httpServer);
 
 const protocoloConfiguration = {
     path: 'COM3',
@@ -10,9 +13,7 @@ const protocoloConfiguration = {
 SerialPort.list().then(
     ports => ports.forEach(ports => console.log(ports.path)),
     err => console.error(err)
-
-); 
-
+);
 // Define button pin numbers
 const buttonUpPin = 2;
 const buttonDownPin = 3;
